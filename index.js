@@ -186,8 +186,9 @@ Form.prototype.parse = function(req, cb) {
 
   function onReqAborted() {
     waitend = false;
-    self.emit('aborted');
-    handleError(new Error("Request aborted"));
+    var reqAbortedErr = new Error("Request aborted");
+    self.emit('aborted', reqAbortedErr);
+    handleError(reqAbortedErr);
   }
 
   function onReqEnd() {
